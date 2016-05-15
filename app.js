@@ -1,16 +1,21 @@
 $( document ).ready(function() {
 
 	var csvString = "";
-	d3.csv("all_rows.csv", function(error, data) {
-	  if (error) throw error;
-	  csvString += data + "\r\n";
-	});
-
-	var csvData = d3.csvParse(csvString);
 	
+	$.ajax({
+        type: "GET",
+        url: "all_rows.csv",
+        dataType: "text",
+        success: function(data) {processData(data);}
+     });
+	 
+});
 
+function processData(data){
+
+	var csvData = d3.csvParse(data);
+	
 	var previous_song = "";
-
 
 	var doSearch = function(word, callback) {
 		console.log('search for ' + word);
@@ -69,15 +74,9 @@ $( document ).ready(function() {
 		previous_song = elem["Title"];
 		// wait 10 seconds
 		setTimeout(parseFn, 10000);		
-
-		
-		
-
 		
 	}
 
-
 	parseFn();
-
-
-});
+	
+}

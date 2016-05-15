@@ -1,9 +1,11 @@
 var yearInit = 1980;
+var index = 0;
 
 $( document ).ready(function() {
 
 	$("#yearBtn").click(function(){
 		yearInit = $("#yearInput").val();
+		index = 0;
 	});
 
 	var csvString = "";
@@ -63,14 +65,13 @@ function processData(data){
 			}
 		});
 	}
-	var i = 0;
+	
 	var parseFn = function(){
 		elem = csvData[i];
-		i++;
+		index++;
 		while(parseInt(elem["Date"].substring(elem["Date"].length - 4)) < yearInit){
-			window.alert(parseInt(elem["Date"].substring(elem["Date"].length - 4)) + " " + yearInit);
-			i++;	
-			elem = csvData[i];
+			index++;	
+			elem = csvData[index];
 		}
 		
 		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	

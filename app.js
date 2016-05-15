@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-	var data = d3.csvParse("all_rows.csv", function(error, data) {
+	var csvData = d3.csvParse("all_rows.csv", function(error, data) {
 		if (error) throw error;
 		console.log(data); // [{"Hello": "world"}, …]
 	});
@@ -51,7 +51,7 @@ $( document ).ready(function() {
 	}
 	var i = 0;
 	var parseFn = function(){
-		elem = data[i];
+		elem = csvData[i];
 		i++;
 		if(elem["Title"] != previous_song){
 			document.getElementById('title').innerHTML = elem["Title"];

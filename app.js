@@ -54,9 +54,17 @@ var parseFn = function(){
 		// load the song from spotify and play for 3 seconds
 		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), function(result) {
 				console.log('got result', result);
-				document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
-				document.getElementById('audiotag1').play();
-				document.getElementById('img').src = result.tracks[0].cover_url;
+				if(result.tracks.length > 0){
+					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
+					document.getElementById('audiotag1').play();
+					document.getElementById('img').src = result.tracks[0].cover_url;					
+				}
+				else
+				{
+					document.getElementById('audiotag1').stop();
+					document.getElementById('img').src = "";	
+				}
+
 		});
 		
 	}

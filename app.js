@@ -17,15 +17,15 @@ function processData(data){
 	
 	var previous_song = "";
 
-	var doSearch = function(word, callback) {
-		console.log('search for ' + word);
-		var url = 'https://api.spotify.com/v1/search?type=track&limit=50&q=' + encodeURIComponent('track:"'+word+'"');
+	var doSearch = function(title, artist, callback) {
+		console.log('search for ' + title);
+		var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "&" + encodeURIComponent('artist:"'+artist+'"');
 		$.ajax(url, {
 			dataType: 'json',
 			success: function(r) {
 				console.log('got track', r);
 				callback({
-					word: word,
+					title: title,
 					tracks: r.tracks.items
 						.map(function(item) {
 							var ret = {
@@ -51,7 +51,7 @@ function processData(data){
 			},
 			error: function(r) {
 				callback({
-					word: word,
+					title: title,
 					tracks: []
 				});
 			}
@@ -65,10 +65,11 @@ function processData(data){
 	if(elem["Title"] != previous_song){
 			
 			// load the song from spotify and play for 3 seconds
-			doSearch(elem["Title"], function(result) {
-					console.log('got word result', result);
+			doSearch(elem["Title"], elem["Artist"], function(result) {
+					console.log('got result', result);
 					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 					document.getElementById('audiotag1').play();
+					document.getElementById('img').src = result.cover_url;
 			});
 			
 		}

@@ -66,7 +66,7 @@ function processData(data){
 			// load the song from spotify and play for 7 seconds
 			doSearch(elem["Title"], function(result) {
 					console.log('got word result', result);
-					document.getElementById('audiotag1').src = result.preview;
+					document.getElementById('audiotag1').src = result[0].preview;
 					document.getElementById('audiotag1').play();
 			});
 			

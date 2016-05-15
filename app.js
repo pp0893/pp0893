@@ -1,8 +1,9 @@
 var yearInit = 1980;
 var index = 0;
+var previous_song = "";
+var ready = false;
 
 $( document ).ready(function() {
-
 
 	var csvString = "";
 	
@@ -23,7 +24,7 @@ $( document ).ready(function() {
 			change: function( event, ui ) {
 				yearInit = ui.value;
 				index = 0;
-				parseFn();
+				if(ready) parseFn();
 			}
 		});
 	});
@@ -34,52 +35,7 @@ $( document ).ready(function() {
 function processData(data){
 
 	var csvData = d3.csvParse(data);
-	
-	var previous_song = "";
-
-	var doSearch = function(title, artist, year, callback) {
-		console.log('search for ' + title);
-		var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "&" + encodeURIComponent('artist:"'+artist+'"') + "&" + encodeURIComponent('year:"'+year+'"') ;
-		$.ajax(url, {
-			dataType: 'json',
-			success: function(r) {
-				console.log('got track', r);
-				callback({
-					title: title,
-					tracks: r.tracks.items
-						.map(function(item) {
-							var ret = {
-								name: item.name,
-								artist: 'Unknown',
-								artist_uri: '',
-								album: item.album.name,
-								album_uri: item.album.uri,
-								cover_url: '',
-								uri: item.uri,
-								preview: item.preview_url
-							}
-							if (item.artists.length > 0) {
-								ret.artist = item.artists[0].name;
-								ret.artist_uri = item.artists[0].uri;
-							}
-							if (item.album.images.length > 0) {
-								ret.cover_url = item.album.images[0].url;
-							}
-							return ret;
-						})
-				});
-			},
-			error: function(r) {
-				callback({
-					title: title,
-					tracks: []
-				});
-			}
-		});
-	}
-	
-
-
+	ready = true;
 	parseFn();
 	
 }
@@ -108,4 +64,45 @@ var parseFn = function(){
 	// wait 3 seconds
 	setTimeout(parseFn, 3000);		
 	
+}
+
+var doSearch = function(title, artist, year, callback) {
+	console.log('search for ' + title);
+	var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "&" + encodeURIComponent('artist:"'+artist+'"') + "&" + encodeURIComponent('year:"'+year+'"') ;
+	$.ajax(url, {
+		dataType: 'json',
+		success: function(r) {
+			console.log('got track', r);
+			callback({
+				title: title,
+				tracks: r.tracks.items
+					.map(function(item) {
+						var ret = {
+							name: item.name,
+							artist: 'Unknown',
+							artist_uri: '',
+							album: item.album.name,
+							album_uri: item.album.uri,
+							cover_url: '',
+							uri: item.uri,
+							preview: item.preview_url
+						}
+						if (item.artists.length > 0) {
+							ret.artist = item.artists[0].name;
+							ret.artist_uri = item.artists[0].uri;
+						}
+						if (item.album.images.length > 0) {
+							ret.cover_url = item.album.images[0].url;
+						}
+						return ret;
+					})
+			});
+		},
+		error: function(r) {
+			callback({
+				title: title,
+				tracks: []
+			});
+		}
+	});
 }

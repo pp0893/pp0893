@@ -10,18 +10,30 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="custom.css">
 
 
   </head>
   <body>
-    <div class="container">
-		<h1 id="slogan">This page presents the top weekly song in France, from 1984 to 2016.</h1>
-		<p>It was made possible using <a href="https://fr.wikipedia.org/wiki/Liste_des_singles_num%C3%A9ro_un_en_France">Wikipedia</a>, <a href="https://www.spotify.com">Spotify</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="https://d3js.org/">D3</a> and <a href="http://jquery.com/">JQuery</a>. Hosted on GitHub Pages.</p>
-		<h2 id="title" class="text-center"></h2>
-		<img id="img" src="" class="center-block img-thumbnail">
-		<div id="slider"></div>
-		<p id="yearSld">1985</p>
-		<p>Created in Paris by Pierre. May 2016.</p>
+	<div class="banner">
+		<div class="container">
+			<h1 id="slogan">This page presents the top weekly song in France, from 1984 to 2016.</h1>
+		</div>
+	</div>
+	<div class="container-fluid main">
+		<h2 id="title" class="text-center">03/03/1985 : Ghostbusters de Ray Parker, Jr.</h2>
+		<img id="img" src="https://i.scdn.co/image/0bb1f30fc7fbbee0d0e5cb8501d4f00339eef087" class="center-block img-thumbnail">
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-1 col-md-offset-3"><input id="yearSld" class="form-control" value="1985"></div>
+			<div class="col-md-5 col-slider"><div id="slider"></div></div>
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="container">
+			<p class = "text-center">Made possible using <a href="https://fr.wikipedia.org/wiki/Liste_des_singles_num%C3%A9ro_un_en_France">Wikipedia</a>, <a href="https://www.spotify.com">Spotify</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="https://d3js.org/">D3</a> and <a href="http://jquery.com/">JQuery</a>.<br /> Hosted on GitHub Pages.Created in Paris by Pierre. May 2016.</p>
+		</div>
 	</div>
 	<audio id="audiotag1" src="" preload="no"></audio>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

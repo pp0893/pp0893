@@ -20,7 +20,7 @@ $( document ).ready(function() {
 			min: 1984,
 			max: 2016,
 			slide: function( event, ui ) {
-				$("#yearSld").text(ui.value);
+				$("#yearSld").attr('value', ui.value);
 			},
 			change: function( event, ui ) {
 				yearInit = ui.value;

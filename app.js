@@ -40,6 +40,35 @@ function processData(data){
 	
 }
 
+var callbackSearch(result){
+	//console.log('got result', result);
+	if(result.tracks.length > 0){
+		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
+		document.getElementById('audiotag1').play();
+		document.getElementById('img').src = result.tracks[0].cover_url;					
+	}
+	else
+	{
+		// recherche dégradée
+		doSearch(elem["Title"], "", "", callbackSearchTitleOnly);
+	}
+}
+
+var callbackSearchTitleOnly(result){
+	//console.log('got result', result);
+	if(result.tracks.length > 0){
+		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
+		document.getElementById('audiotag1').play();
+		document.getElementById('img').src = result.tracks[0].cover_url;					
+	}
+	else
+	{
+		document.getElementById('audiotag1').pause();
+		document.getElementById('img').src = "";	
+		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
+	}
+}
+
 var parseFn = function(){
 	elem = csvData[index];
 	index++;
@@ -52,21 +81,7 @@ var parseFn = function(){
 	if(elem["Title"] != previous_song){
 		
 		// load the song from spotify and play for 3 seconds
-		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), function(result) {
-				//console.log('got result', result);
-				if(result.tracks.length > 0){
-					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
-					document.getElementById('audiotag1').play();
-					document.getElementById('img').src = result.tracks[0].cover_url;					
-				}
-				else
-				{
-					document.getElementById('audiotag1').pause();
-					document.getElementById('img').src = "";	
-					console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"])
-				}
-
-		});
+		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), callbackSearch);
 		
 	}
 	previous_song = elem["Title"];
@@ -74,6 +89,8 @@ var parseFn = function(){
 	setTimeout(parseFn, 3000);		
 	
 }
+
+
 
 var doSearch = function(title, artist, year, callback) {
 	//console.log('search for ' + title);

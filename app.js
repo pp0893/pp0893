@@ -61,9 +61,10 @@ function processData(data){
 	var parseFn = function(){
 		elem = csvData[i];
 		i++;
-		if(elem["Title"] != previous_song){
-			document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"];
-			// load the song from spotify and play for 7 seconds
+		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
+	if(elem["Title"] != previous_song){
+			
+			// load the song from spotify and play for 3 seconds
 			doSearch(elem["Title"], function(result) {
 					console.log('got word result', result);
 					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
@@ -72,8 +73,8 @@ function processData(data){
 			
 		}
 		previous_song = elem["Title"];
-		// wait 10 seconds
-		setTimeout(parseFn, 10000);		
+		// wait 3 seconds
+		setTimeout(parseFn, 3000);		
 		
 	}
 

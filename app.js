@@ -17,7 +17,7 @@ $( document ).ready(function() {
 	 
 	$(function() {
 		$( "#slider" ).slider({
-			min: 1985,
+			min: 1984,
 			max: 2016,
 			slide: function( event, ui ) {
 				$("#yearSld").text(ui.value);

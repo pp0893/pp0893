@@ -1,4 +1,10 @@
+var yearInit = 1980;
+
 $( document ).ready(function() {
+
+	$("#yearBtn").click(function(){
+		yearInit = $("#yearInput").val();
+	});
 
 	var csvString = "";
 	
@@ -61,6 +67,10 @@ function processData(data){
 	var parseFn = function(){
 		elem = csvData[i];
 		i++;
+		while(parseInt(elem["Date"].substring(elem["Date"].length - 4))){
+			i++;	
+		}
+		
 		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
 		if(elem["Title"] != previous_song){
 			

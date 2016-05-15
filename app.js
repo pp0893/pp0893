@@ -25,7 +25,7 @@ $( document ).ready(function() {
 			change: function( event, ui ) {
 				yearInit = ui.value;
 				index = 0;
-				if(ready) parseFn();
+				//if(ready) parseFn();
 			}
 		});
 	});

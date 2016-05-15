@@ -68,6 +68,7 @@ function processData(data){
 		elem = csvData[i];
 		i++;
 		while(parseInt(elem["Date"].substring(elem["Date"].length - 4)) < yearInit){
+			window.alert(parseInt(elem["Date"].substring(elem["Date"].length - 4)) + " " + yearInit);
 			i++;	
 			elem = csvData[i];
 		}

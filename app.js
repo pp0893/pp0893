@@ -43,7 +43,7 @@ function processData(data){
 								ret.artist_uri = item.artists[0].uri;
 							}
 							if (item.album.images.length > 0) {
-								ret.cover_url = item.album.images[item.album.images.length - 1].url;
+								ret.cover_url = item.album.images[0].url;
 							}
 							return ret;
 						})

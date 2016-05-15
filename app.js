@@ -40,7 +40,7 @@ function processData(data){
 	
 }
 
-var callbackSearch(result){
+var callbackSearch=function(result){
 	//console.log('got result', result);
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
@@ -54,7 +54,7 @@ var callbackSearch(result){
 	}
 }
 
-var callbackSearchTitleOnly(result){
+var callbackSearchTitleOnly=function(result){
 	//console.log('got result', result);
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";

@@ -3,10 +3,6 @@ var index = 0;
 
 $( document ).ready(function() {
 
-	$("#yearBtn").click(function(){
-		yearInit = $("#yearInput").val();
-		index = 0;
-	});
 
 	var csvString = "";
 	
@@ -16,6 +12,21 @@ $( document ).ready(function() {
         dataType: "text",
         success: function(data) {processData(data);}
      });
+	 
+	$(function() {
+		$( "#slider" ).slider({
+			min: 1985,
+			max: 2016,
+			slide: function( event, ui ) {
+				$("#yearSld").text(ui.value);
+			},
+			change: function( event, ui ) {
+				yearInit = $("#yearInput").val();
+				index = 0;
+			}
+		});
+	});
+	
 	 
 });
 

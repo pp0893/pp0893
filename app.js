@@ -17,9 +17,9 @@ function processData(data){
 	
 	var previous_song = "";
 
-	var doSearch = function(title, artist, callback) {
+	var doSearch = function(title, artist, year, callback) {
 		console.log('search for ' + title);
-		var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "&" + encodeURIComponent('artist:"'+artist+'"');
+		var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "&" + encodeURIComponent('artist:"'+artist+'"') + "&" + encodeURIComponent('year:"'+year+'"') ;
 		$.ajax(url, {
 			dataType: 'json',
 			success: function(r) {
@@ -62,10 +62,10 @@ function processData(data){
 		elem = csvData[i];
 		i++;
 		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
-	if(elem["Title"] != previous_song){
+		if(elem["Title"] != previous_song){
 			
 			// load the song from spotify and play for 3 seconds
-			doSearch(elem["Title"], elem["Artist"], function(result) {
+			doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), function(result) {
 					console.log('got result', result);
 					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 					document.getElementById('audiotag1').play();

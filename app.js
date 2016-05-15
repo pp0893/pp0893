@@ -49,28 +49,28 @@ $( document ).ready(function() {
 			}
 		});
 	}
-
-	var parseFn = function(){	
-		for(var elem in data){
+	var i = 0;
+	var parseFn = function(){
+		elem = data[i];
+		i++;
+		if(elem["Title"] != previous_song){
+			document.getElementById('title').innerHTML = elem["Title"];
+			// load the song from spotify and play for 7 seconds
+			doSearch(elem["Title"], function(result) {
+					console.log('got word result', result);
+					document.getElementById('audiotag1').src = result.preview;
+					document.getElementById('audiotag1').play();
+			});
 			
-			if(elem["Title"] != previous_song){
-				document.getElementById('title').innerHTML = elem["Title"];
-				// load the song from spotify and play for 7 seconds
-				doSearch(elem["Title"], function(result) {
-						console.log('got word result', result);
-						document.getElementById('audiotag1').src = result.preview;
-						document.getElementById('audiotag1').play();
-				});
-				
-			}
-			
-			// wait 10 seconds
-			setTimeout(parseFn, 10000);		
+		}
+		previous_song = elem["Title"];
+		// wait 10 seconds
+		setTimeout(parseFn, 10000);		
 
-			previous_song = elem["Title"];
+		
+		
 
-
-			}	
+		
 	}
 
 

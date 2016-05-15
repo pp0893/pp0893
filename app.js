@@ -36,7 +36,7 @@ function processData(data){
 								album_uri: item.album.uri,
 								cover_url: '',
 								uri: item.uri,
-								preview: preview_url
+								preview: item.preview_url
 							}
 							if (item.artists.length > 0) {
 								ret.artist = item.artists[0].name;
@@ -62,7 +62,7 @@ function processData(data){
 		elem = csvData[i];
 		i++;
 		if(elem["Title"] != previous_song){
-			document.getElementById('title').innerHTML = elem["Title"];
+			document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"];
 			// load the song from spotify and play for 7 seconds
 			doSearch(elem["Title"], function(result) {
 					console.log('got word result', result);

@@ -69,7 +69,7 @@ function processData(data){
 					console.log('got result', result);
 					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 					document.getElementById('audiotag1').play();
-					document.getElementById('img').src = result.cover_url;
+					document.getElementById('img').src = result.tracks[0].cover_url;
 			});
 			
 		}

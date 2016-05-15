@@ -67,7 +67,7 @@ function processData(data){
 	}
 	
 	var parseFn = function(){
-		elem = csvData[i];
+		elem = csvData[index];
 		index++;
 		while(parseInt(elem["Date"].substring(elem["Date"].length - 4)) < yearInit){
 			index++;	

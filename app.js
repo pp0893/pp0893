@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-	var csvData = d3.csvParse("all_rows.csv", function(error, data) {
+	var csvData = d3.csv("all_rows.csv", function(error, data) {
 		if (error) throw error;
 		console.log(data); // [{"Hello": "world"}, …]
 	});

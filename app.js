@@ -45,7 +45,8 @@ var callbackSearch=function(result){
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		document.getElementById('img').src = result.tracks[0].cover_url;					
+		document.getElementById('img').src = result.tracks[0].cover_url;	
+		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
@@ -59,10 +60,12 @@ var callbackSearchTitleOnly=function(result){
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		document.getElementById('img').src = result.tracks[0].cover_url;					
+		document.getElementById('img').src = result.tracks[0].cover_url;	
+		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
+		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		document.getElementById('audiotag1').pause();
 		document.getElementById('img').src = "";	
 		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
@@ -77,7 +80,7 @@ var parseFn = function(){
 		elem = csvData[index];
 	}
 	
-	document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
+		
 	if(elem["Title"] != previous_song){
 		
 		// load the song from spotify and play for 3 seconds

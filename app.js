@@ -34,7 +34,7 @@ $( document ).ready(function() {
 });
 
 function processData(data){
-
+	console.log(data);
 	csvData = d3.csvParse(data);
 	ready = true;
 	parseFn();
@@ -69,7 +69,7 @@ var parseFn = function(){
 
 var doSearch = function(title, artist, year, callback) {
 	console.log('search for ' + title);
-	var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"')+ "%20" + encodeURIComponent('artist:"'+artist+'"') + "%20" + encodeURIComponent('year:"'+year+'"') ;
+	var url = 'https://api.spotify.com/v1/search?type=track&limit=1&q=' + encodeURIComponent('track:"'+title+'"') + encodeURIComponent(' artist:"'+artist+'"') + encodeURIComponent(' year:"'+year+'"') ;
 	$.ajax(url, {
 		dataType: 'json',
 		success: function(r) {

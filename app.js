@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-	var data = d3.csv("https://www.dropbox.com/s/fndicprqe3gmjkh/all_rows.csv?dl=0", function(error, data) {
+	var data = d3.csv("all_rows.csv", function(error, data) {
 		if (error) throw error;
 		console.log(data); // [{"Hello": "world"}, …]
 	});

@@ -61,7 +61,7 @@ var parseFn = function(){
 				}
 				else
 				{
-					document.getElementById('audiotag1').stop();
+					document.getElementById('audiotag1').pause();
 					document.getElementById('img').src = "";	
 				}
 

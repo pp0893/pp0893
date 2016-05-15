@@ -21,8 +21,9 @@ $( document ).ready(function() {
 				$("#yearSld").text(ui.value);
 			},
 			change: function( event, ui ) {
-				yearInit = $("#yearInput").val();
+				yearInit = ui.value;
 				index = 0;
+				parseFn();
 			}
 		});
 	});
@@ -77,32 +78,34 @@ function processData(data){
 		});
 	}
 	
-	var parseFn = function(){
-		elem = csvData[index];
-		index++;
-		while(parseInt(elem["Date"].substring(elem["Date"].length - 4)) < yearInit){
-			index++;	
-			elem = csvData[index];
-		}
-		
-		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
-		if(elem["Title"] != previous_song){
-			
-			// load the song from spotify and play for 3 seconds
-			doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), function(result) {
-					console.log('got result', result);
-					document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
-					document.getElementById('audiotag1').play();
-					document.getElementById('img').src = result.tracks[0].cover_url;
-			});
-			
-		}
-		previous_song = elem["Title"];
-		// wait 3 seconds
-		setTimeout(parseFn, 3000);		
-		
-	}
+
 
 	parseFn();
+	
+}
+
+var parseFn = function(){
+	elem = csvData[index];
+	index++;
+	while(parseInt(elem["Date"].substring(elem["Date"].length - 4)) < yearInit){
+		index++;	
+		elem = csvData[index];
+	}
+	
+	document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	
+	if(elem["Title"] != previous_song){
+		
+		// load the song from spotify and play for 3 seconds
+		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), function(result) {
+				console.log('got result', result);
+				document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
+				document.getElementById('audiotag1').play();
+				document.getElementById('img').src = result.tracks[0].cover_url;
+		});
+		
+	}
+	previous_song = elem["Title"];
+	// wait 3 seconds
+	setTimeout(parseFn, 3000);		
 	
 }

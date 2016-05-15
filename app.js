@@ -69,6 +69,7 @@ function processData(data){
 		i++;
 		while(parseInt(elem["Date"].substring(elem["Date"].length - 4))){
 			i++;	
+			elem = csvData[i];
 		}
 		
 		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];	

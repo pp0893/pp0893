@@ -1,9 +1,12 @@
 $( document ).ready(function() {
 
-	var csvData = d3.csv("all_rows.csv", function(error, data) {
-		if (error) throw error;
-		console.log(data); // [{"Hello": "world"}, …]
+	var csvString = "";
+	d3.csv("all_rows.csv", function(error, data) {
+	  if (error) throw error;
+	  csvString += data + "\r\n";
 	});
+
+	var csvData = d3.csvParse(csvString);
 	
 
 	var previous_song = "";

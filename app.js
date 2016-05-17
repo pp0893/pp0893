@@ -69,13 +69,11 @@ var callbackSearch=function(result){
 function updateSongInfo(result){
 	var chaine;
 	if(step == 1){
-		$(".current").fadeOut();
-		$(".hiddenDiv").fadeIn();
+		$(".current").fadeOut(function(){$(".hiddenDiv").fadeIn();});
 		chaine = "hiddenDiv";
 		step = 0;
 	}else{
-		$(".current").fadeIn();
-		$(".hiddenDiv").fadeOut();
+		$(".current").fadeIn(function(){$(".hiddenDiv").fadeOut();});
 		chaine = "current";
 		step = 1;
 	}
@@ -113,7 +111,7 @@ var parseFn = function(){
 
 	previous_song = elem["Title"];
 	// wait 3 seconds
-	setTimeout(parseFn, 3000);			
+	setTimeout(parseFn, 4000);			
 	
 }
 

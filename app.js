@@ -4,6 +4,7 @@ var previous_song = "";
 var csvData;
 var stop = false;
 var step = 1;
+var previous_year = 1984;
 
 $( document ).ready(function() {
 	
@@ -105,6 +106,10 @@ var parseFn = function(){
 		elem = csvData[index];
 	}
 	
+	if(parseInt(elem["Date"].substring(elem["Date"].length - 4)) != previous_year){
+		$( "#slider" ).slider( "value", parseInt(elem["Date"].substring(elem["Date"].length - 4)));
+	}
+	
 	if(elem["Title"] != previous_song){
 		// load the song from spotify and play for 3 seconds
 		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), callbackSearch);
@@ -112,7 +117,8 @@ var parseFn = function(){
 		$(".current > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 	}
-	$( "#slider" ).slider( "value", parseInt(elem["Date"].substring(elem["Date"].length - 4)));
+		
+	previous_year = parseInt(elem["Date"].substring(elem["Date"].length - 4));
 	previous_song = elem["Title"];
 	// wait 3 seconds
 	setTimeout(parseFn, 4000);			

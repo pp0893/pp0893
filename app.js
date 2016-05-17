@@ -25,12 +25,12 @@ $( document ).ready(function() {
 	});
 	
 	$("#play").click(function(){
-		if($("#play").html().trim() == '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>'){
-			$("#play").html('<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>');
+		if($("#play").html().trim() == '<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>'){
+			$("#play").html('<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>');
 			$("audio")[0].volume = 1;
 		}
 		else{
-			$("#play").html('<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>');
+			$("#play").html('<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>');
 			$("audio")[0].volume = 0;
 		}
 	});
@@ -55,31 +55,28 @@ function processData(data){
 var callbackSearch=function(result){
 	//console.log('got result', result);
 	if(result.tracks.length > 0){
-		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
-		document.getElementById('audiotag1').play();
-		document.getElementById('img').src = result.tracks[0].cover_url;	
-		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
+		updateSongInfo();		
 	}
 	else
 	{
 		// recherche dégradée
-		doSearch(elem["Title"], "", "", callbackSearchTitleOnly);
+		doSearch(elem["Title"], "", "", updateSongInfo);
 	}
 }
 
-var callbackSearchTitleOnly=function(result){
-	//console.log('got result', result);
+
+function updateSongInfo(result){
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		document.getElementById('img').src = result.tracks[0].cover_url;	
-		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
+		$(".current img").src = result.tracks[0].cover_url;	
+		$(".current title").innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
-		document.getElementById('title').innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		document.getElementById('audiotag1').pause();
-		document.getElementById('img').src = "";	
+		$(".current img").src = "";	
+		$(".current title").innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
 	}
 }

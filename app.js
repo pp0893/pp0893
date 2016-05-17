@@ -84,9 +84,9 @@ function updateSongInfo(result){
 }
 
 function switchTags(){
-	$(".current").addClass(".toRemoveCurrent").removeClass(".current");
-	$(".hidden").addClass(".current").removeClass(".hidden");
-	$(".toRemoveCurrent").addClass(".hidden").removeClass(".toRemoveCurrent");
+	$("current").addClass("toRemoveCurrent").removeClass("current");
+	$("hidden").addClass("current").removeClass("hidden");
+	$("toRemoveCurrent").addClass("hidden").removeClass("toRemoveCurrent");
 }
 
 var parseFn = function(){

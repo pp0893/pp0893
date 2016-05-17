@@ -67,26 +67,26 @@ var callbackSearch=function(result){
 
 function updateSongInfo(result){
 	$(".current").fadeOut();
-	$(".hidden").fadeIn(switchTags);
+	$(".hiddenDiv").fadeIn(switchTags);
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		$(".hidden > #img")[0].src = result.tracks[0].cover_url;	
-		$(".hidden > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
+		$(".hiddenDiv > #img")[0].src = result.tracks[0].cover_url;	
+		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
 		document.getElementById('audiotag1').pause();
-		$(".hidden > #img")[0].src = "";	
-		$(".hidden > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
+		$(".hiddenDiv > #img")[0].src = "";	
+		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
 	}
 }
 
 function switchTags(){
 	$("current").addClass("toRemoveCurrent").removeClass("current");
-	$("hidden").addClass("current").removeClass("hidden");
-	$("toRemoveCurrent").addClass("hidden").removeClass("toRemoveCurrent");
+	$("hiddenDiv").addClass("current").removeClass("hidden");
+	$("toRemoveCurrent").addClass("hiddenDiv").removeClass("toRemoveCurrent");
 }
 
 var parseFn = function(){

@@ -1,7 +1,6 @@
 var yearInit = 1980;
 var index = 0;
 var previous_song = "";
-var ready = false;
 var csvData;
 var stop = false;
 
@@ -49,8 +48,7 @@ $( document ).ready(function() {
 
 function processData(data){
 	csvData = d3.csvParse(data);
-	ready = true;
-	parseFn();
+	//parseFn();
 }
 
 

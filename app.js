@@ -82,14 +82,14 @@ function updateSongInfo(result){
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		$("."&chaine&" > #img")[0].src = result.tracks[0].cover_url;	
-		$("."&chaine&" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
+		$("."+chaine+" > #img")[0].src = result.tracks[0].cover_url;	
+		$("."+chaine+" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
 		document.getElementById('audiotag1').pause();
-		$("."&chaine&" > #img")[0].src = "";	
-		$("."&chaine&" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
+		$("."+chaine+" > #img")[0].src = "";	
+		$("."+chaine+" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
 	}
 }

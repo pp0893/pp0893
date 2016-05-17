@@ -3,18 +3,13 @@ var index = 0;
 var previous_song = "";
 var ready = false;
 var csvData;
+var stop = false;
 
 $( document ).ready(function() {
-
-	var csvString = "";
 	
-	$.ajax({
-        type: "GET",
-        url: "all_rows.csv",
-        dataType: "text",
-        success: function(data) {processData(data);}	
-     });
-	 
+	
+	var csvString = "";
+		 
 	$(function() {
 		$( "#slider" ).slider({
 			min: 1984,
@@ -30,6 +25,22 @@ $( document ).ready(function() {
 		});
 	});
 	
+	$("#play").click(function(){
+		if($("#play").html() == '<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play'){
+			$.ajax({
+				type: "GET",
+				url: "all_rows.csv",
+				dataType: "text",
+				success: function(data) {processData(data);}	
+			});
+			$("#play").html('<span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop');
+		}
+		else{
+			stopMusic();
+			$("#play").html('<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play');
+		}
+		
+	});
 	 
 });
 
@@ -38,6 +49,11 @@ function processData(data){
 	ready = true;
 	parseFn();
 	
+}
+
+function stopMusic(){
+	stop = true;
+	$("audio").volume = 0;
 }
 
 var callbackSearch=function(result){
@@ -88,8 +104,11 @@ var parseFn = function(){
 		
 	}
 	previous_song = elem["Title"];
-	// wait 3 seconds
-	setTimeout(parseFn, 3000);		
+	while(!stop){
+		// wait 3 seconds
+		setTimeout(parseFn, 3000);		
+	}
+	
 	
 }
 

@@ -143,7 +143,7 @@ var doSearch = function(title, artist, year, callback) {
 							ret.artist_uri = item.artists[0].uri;
 						}
 						if (item.album.images.length > 0) {
-							ret.cover_url = item.album.images[0].url;
+							ret.cover_url = item.album.images[1].url;
 						}
 						return ret;
 					})

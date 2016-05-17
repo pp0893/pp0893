@@ -24,16 +24,18 @@ $( document ).ready(function() {
 			}
 		});
 	});
-	
+	$.ajax({
+		type: "GET",
+		url: "all_rows.csv",
+		dataType: "text",
+		success: function(data) {processData(data);}	
+	});
 	$("#play").click(function(){
 		if($("#play").html() == '<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play'){
-			$.ajax({
-				type: "GET",
-				url: "all_rows.csv",
-				dataType: "text",
-				success: function(data) {processData(data);}	
-			});
 			$("#play").html('<span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop');
+			while(!ready){
+			}
+			parseFn();
 		}
 		else{
 			stopMusic();
@@ -47,8 +49,6 @@ $( document ).ready(function() {
 function processData(data){
 	csvData = d3.csvParse(data);
 	ready = true;
-	parseFn();
-	
 }
 
 function stopMusic(){

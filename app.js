@@ -19,7 +19,11 @@ $( document ).ready(function() {
 			},
 			change: function( event, ui ) {
 				yearInit = ui.value;
-				index = 0;
+				var elem = csvData[index];
+				if(yearInit != parseInt(elem["Date"].substring(elem["Date"].length - 4))){
+					index = 0;
+				}
+				
 				//if(ready) parseFn();
 			}
 		});

@@ -103,13 +103,14 @@ var parseFn = function(){
 		elem = csvData[index];
 	}
 	
-		
 	if(elem["Title"] != previous_song){
-		
 		// load the song from spotify and play for 3 seconds
 		doSearch(elem["Title"], elem["Artist"], elem["Date"].substring(elem["Date"].length - 4), callbackSearch);
-		
+	}else{
+		$(".current > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
+		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 	}
+
 	previous_song = elem["Title"];
 	// wait 3 seconds
 	setTimeout(parseFn, 3000);			

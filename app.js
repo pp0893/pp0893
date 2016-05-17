@@ -3,6 +3,7 @@ var index = 0;
 var previous_song = "";
 var csvData;
 var stop = false;
+var step = 1;
 
 $( document ).ready(function() {
 	
@@ -66,28 +67,33 @@ var callbackSearch=function(result){
 
 
 function updateSongInfo(result){
-	$(".current").fadeOut();
-	$(".hiddenDiv").fadeIn(switchTags);
+	var chaine;
+	if(step == 1){
+		$(".current").fadeOut();
+		$(".hiddenDiv").fadeIn();
+		chaine = "hiddenDiv";
+		step = 0;
+	}else{
+		$(".current").fadeOut();
+		$(".hiddenDiv").fadeIn();
+		chaine = "current";
+		step = 1;
+	}
 	if(result.tracks.length > 0){
 		document.getElementById('audiotag1').src = result.tracks[0].preview + ".mp3";
 		document.getElementById('audiotag1').play();
-		$(".hiddenDiv > #img")[0].src = result.tracks[0].cover_url;	
-		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
+		$("."&chaine&" > #img")[0].src = result.tracks[0].cover_url;	
+		$("."&chaine&" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];		
 	}
 	else
 	{
 		document.getElementById('audiotag1').pause();
-		$(".hiddenDiv > #img")[0].src = "";	
-		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
+		$("."&chaine&" > #img")[0].src = "";	
+		$("."&chaine&" > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		console.log('nothing found for '+elem["Title"] + " - " + elem["Artist"]  + " - " +  elem["Date"]);
 	}
 }
 
-function switchTags(){
-	$("current").addClass("toRemoveCurrent").removeClass("current");
-	$("hiddenDiv").addClass("current").removeClass("hidden");
-	$("toRemoveCurrent").addClass("hiddenDiv").removeClass("toRemoveCurrent");
-}
 
 var parseFn = function(){
 	elem = csvData[index];

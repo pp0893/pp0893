@@ -33,13 +33,12 @@ $( document ).ready(function() {
 	$("#play").click(function(){
 		if($("#play").html() == '<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play'){
 			$("#play").html('<span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop');
-			while(!ready){
-			}
-			parseFn();
+			$("audio").volume = 1;
 		}
 		else{
 			stopMusic();
 			$("#play").html('<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play');
+			$("audio").volume = 0;
 		}
 		
 	});
@@ -49,6 +48,7 @@ $( document ).ready(function() {
 function processData(data){
 	csvData = d3.csvParse(data);
 	ready = true;
+	parseFn();
 }
 
 function stopMusic(){

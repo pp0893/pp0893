@@ -108,7 +108,8 @@ var parseFn = function(){
 		$(".current > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 		$(".hiddenDiv > #title")[0].innerHTML = elem["Date"] + " : " + elem["Title"] + " de " + elem["Artist"];
 	}
-
+	$("#yearSld").attr("value", elem["Date"].substring(elem["Date"].length - 4));
+	$( "#slider" ).slider( "value", parseInt(elem["Date"].substring(elem["Date"].length - 4)));
 	previous_song = elem["Title"];
 	// wait 3 seconds
 	setTimeout(parseFn, 4000);			

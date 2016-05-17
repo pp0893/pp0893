@@ -74,8 +74,8 @@ function updateSongInfo(result){
 		chaine = "hiddenDiv";
 		step = 0;
 	}else{
-		$(".current").fadeOut();
-		$(".hiddenDiv").fadeIn();
+		$(".current").fadeIn();
+		$(".hiddenDiv").fadeOut();
 		chaine = "current";
 		step = 1;
 	}

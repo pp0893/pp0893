@@ -55,7 +55,7 @@ function processData(data){
 var callbackSearch=function(result){
 	//console.log('got result', result);
 	if(result.tracks.length > 0){
-		updateSongInfo();		
+		updateSongInfo(result);		
 	}
 	else
 	{

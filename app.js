@@ -48,7 +48,7 @@ $( document ).ready(function() {
 
 function processData(data){
 	csvData = d3.csvParse(data);
-	//parseFn();
+	parseFn();
 }
 
 

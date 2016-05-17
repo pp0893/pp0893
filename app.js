@@ -21,6 +21,7 @@ $( document ).ready(function() {
 			change: function( event, ui ) {
 				yearInit = ui.value;
 				var elem = csvData[index];
+				$("#yearSld").attr('value', ui.value);
 				if(yearInit != parseInt(elem["Date"].substring(elem["Date"].length - 4))){
 					index = 0;
 				}

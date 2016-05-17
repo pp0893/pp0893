@@ -8,7 +8,7 @@ $( document ).ready(function() {
 	
 	
 	var csvString = "";
-		 
+	$("audio")[0].volume = 0;
 	$(function() {
 		$( "#slider" ).slider({
 			min: 1984,
@@ -25,13 +25,13 @@ $( document ).ready(function() {
 	});
 	
 	$("#play").click(function(){
-		if($("#play").html() == '<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play'){
-			$("#play").html('<span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop');
-			$("audio").volume = 1;
+		if($("#play").html().trim() == '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>'){
+			$("#play").html('<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>');
+			$("audio")[0].volume = 1;
 		}
 		else{
-			$("#play").html('<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play');
-			$("audio").volume = 0;
+			$("#play").html('<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>');
+			$("audio")[0].volume = 0;
 		}
 	});
 	
